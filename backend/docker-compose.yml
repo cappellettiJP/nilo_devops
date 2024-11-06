@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  activity-itinerary-rest:
+    build:
+      context: ./activity-itinerary-rest
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/activity-itinerary-rest-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8083"
+    networks:
+      - app-network
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/api-gateway-manager-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  city-manager-rest:
+    build:
+      context: ./city-manager-rest
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/city-manager-rest-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8082"
+    networks:
+      - app-network
+
+  keycloak-adapter:
+    build:
+      context: ./keycloak-adapter
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/keycloack-adapter-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080"
+    networks:
+      - app-network
+
+  registry-discovery:
+    build:
+      context: ./registry-discovery
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/eurekaServer-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080"
+    networks:
+      - app-network
+
+  trip-rest:
+    build:
+      context: ./trip-rest
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/trip-rest-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8085"
+    networks:
+      - app-network
+
+  user-rest:
+    build:
+      context: ./user-rest
+      dockerfile: Dockerfile
+      args:
+        - JAR_FILE=target/user-rest-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8086"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
