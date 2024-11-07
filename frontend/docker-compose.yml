@@ -1,7 +1,13 @@
+networks:
+  app-network:
+    driver: bridge
+
 services:
   react-app:
     build:
-      context: ./home/devops/frontend
+      context: /home/devops/frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "8091:80"
+    networks:
+      - app-network
