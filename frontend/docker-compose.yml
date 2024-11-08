@@ -8,6 +8,6 @@ services:
       context: /home/devops/frontend
       dockerfile: Dockerfile
     ports:
-      - "8091:80"
+      - "9001:80"
     networks:
       - app-network
